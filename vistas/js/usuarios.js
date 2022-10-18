@@ -27,7 +27,7 @@ const crearUsuarios = async () => {
 
     ValidateUser($("#txt_username_user").val()).then(async item => {
         if (!item.result) {
-            let response = await fetch('../api/controller/users', {
+            let response = await fetch('api/controller/users', {
                 method: 'POST',
                 body: JSON.stringify(Usuario),
                 headers: {
@@ -55,7 +55,7 @@ const crearUsuarios = async () => {
 
 const traerUsuariosAll = async () => {
     try {
-        let response = await fetch('../api/controller/users');
+        let response = await fetch('api/controller/users');
         let usuarios = await response.json();
         let templete = ``;
         for (const usuario of usuarios) {
@@ -80,7 +80,7 @@ const traerUsuariosAll = async () => {
 
 
 const traerUsaurio = async (id_user) => {
-    let response = await fetch(`../api/controller/users/${id_user}`);
+    let response = await fetch(`api/controller/users/${id_user}`);
     let usuarios = await response.json();
     console.log(usuarios);
     document.getElementById('id_user').value = usuarios.id_user;
@@ -106,7 +106,7 @@ const actulizarUsuario = async () => {
         telefono_user: $("#telefono_user").val(),
         rol_user: "1"
     }
-    let response = await fetch('../api/controller/users', {
+    let response = await fetch('api/controller/users', {
         method: 'PUT',
         body: JSON.stringify(usuario),
         headers: {
@@ -141,7 +141,7 @@ const deleteUsuario = (id_user) => {
     }).then(async (result) => {
         if (result.isConfirmed) {
 
-            let response = await fetch(`../api/controller/users/${id_user}`, {
+            let response = await fetch(`api/controller/users/${id_user}`, {
                 method: 'DELETE'
             });
             let data = await response.json();
@@ -164,7 +164,7 @@ const deleteUsuario = (id_user) => {
 const modificarCredenciales = async id_user => {
     try {
 
-        let response = await fetch(`../api/controller/users/${id_user}`);
+        let response = await fetch(`api/controller/users/${id_user}`);
         let credenciales = await response.json();
         $("#username_user").val(credenciales.username_user);
         $("#id_user_u").val(credenciales.id_user);

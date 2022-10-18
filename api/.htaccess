@@ -1,0 +1,12 @@
+Options All -Indexes
+
+RewriteEngine On
+
+RewriteRule ^controller/usuarios/([0-9]+)$ controller/usuarios.php?id_usuario=$1
+RewriteRule ^controller/usuarios$ controller/usuarios.php
+
+RewriteRule ^controller/users/([0-9]+)$ controller/users.php?id_user=$1
+RewriteRule ^controller/users$ controller/users.php
+
+RewriteRule ^controller/login$ controller/login.php
+
