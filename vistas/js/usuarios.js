@@ -106,6 +106,7 @@ const actulizarUsuario = async () => {
         telefono_user: $("#telefono_user").val(),
         rol_user: "1"
     }
+
     let response = await fetch('api/controller/users', {
         method: 'PUT',
         body: JSON.stringify(usuario),

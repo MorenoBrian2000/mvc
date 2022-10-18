@@ -11,7 +11,8 @@ class ControladorLibro
     {
         $objModel = new LibroDAO();
         $objModel->tabla = "tbl_libros";
-        $respuesta = $objModel->daoSelectLibro();
+        $id = ($_GET['id'] == 'null') ? null : $_GET['id'];
+        $respuesta = $objModel->daoSelectLibro($id);
         echo json_encode($respuesta);
     }
 
@@ -22,14 +23,40 @@ class ControladorLibro
         $respuesta = $objModel->daoAddLibro($_POST);
         echo $respuesta;
     }
+
+    static public function ctrActulizarLibro($data)
+    {
+        $objModel = new LibroDAO();
+        $objModel->tabla = "tbl_libros";
+        $respuesta = $objModel->daoActulizarLibro($data);
+        echo $respuesta;
+    }
+
+    static public function ctrEliminarLibro()
+    {
+        $objModel = new LibroDAO();
+        $objModel->tabla = "tbl_libros";
+        $respuesta = $objModel->daoEliminarLibro($_GET["id"]);
+        echo $respuesta;
+    }
 }
 
 
-switch ($_POST["action"]) {
-    case 'getLibros':
+switch ($_SERVER["REQUEST_METHOD"]) {
+    case 'GET':
         ControladorLibro::ctrMostrarLibro();
         break;
-    case 'addLibro':
+    case 'POST':
         ControladorLibro::ctrAgregarLibro();
+        break;
+    case 'PUT':
+        $datos = json_decode(file_get_contents('php://input'));
+        ControladorLibro::ctrActulizarLibro($datos);
+        break;
+    case 'DELETE':
+        ControladorLibro::ctrEliminarLibro();
+        break;
+    default:
+        echo json_encode(["Error" => "Accion no requerida"]);
         break;
 }
