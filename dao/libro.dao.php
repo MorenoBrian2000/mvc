@@ -3,6 +3,7 @@ require_once '../model/conexion.modelo.php';
 
 class LibroDAO
 {
+    public $urlBrian = 'http://192.168.25.59/mvc/controller/libro.controller.php?id=null';
     public $tabla;
     public function daoSelectLibro($id)
     {
@@ -49,5 +50,17 @@ class LibroDAO
         $stmt->bindParam(":tema", $datos->tema, PDO::PARAM_STR);
         $response = ($stmt->execute()) ? 'ok' : 'error';
         echo json_encode(["success" =>  $response]);
+    }
+
+    public static function getLibroCurl($urlBrian)
+    {
+        $curl_handle = curl_init();
+        curl_setopt($curl_handle, CURLOPT_URL, $urlBrian);
+        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
+        $curl_data = curl_exec($curl_handle);
+        curl_close($curl_handle);
+        $response_data = json_decode($curl_data);
+        return $response_data;
+        // die();
     }
 }

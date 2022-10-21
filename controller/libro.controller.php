@@ -39,12 +39,25 @@ class ControladorLibro
         $respuesta = $objModel->daoEliminarLibro($_GET["id"]);
         echo $respuesta;
     }
+
+    static public function getLibroCurl()
+    {
+        $objModel = new LibroDAO();
+        $arr_libros = [];
+        $objModel->tabla = "tbl_libros";
+        $respuesta = $objModel->getLibroCurl($objModel->urlBrian);
+        foreach ($respuesta as $key => $libro) {
+            array_push($arr_libros,['id_libro' => $libro->id_libro, 'nombre' => $libro -> nombre, 'descripcion' => $libro -> descripcion, 'tema' => $libro ->tema]);
+        }
+        echo json_encode($arr_libros);
+    }
 }
 
 
 switch ($_SERVER["REQUEST_METHOD"]) {
     case 'GET':
-        ControladorLibro::ctrMostrarLibro();
+        // ControladorLibro::ctrMostrarLibro();
+        ControladorLibro::getLibroCurl();
         break;
     case 'POST':
         ControladorLibro::ctrAgregarLibro();
