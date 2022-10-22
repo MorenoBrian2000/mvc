@@ -1,12 +1,20 @@
 <?php
-require_once '../model/conexion.modelo.php';
+require '../model/conexion.modelo.php';
 
 class LibroDAO
 {
-    public $urlBrian = 'http://192.168.25.59/mvc/controller/libro.controller.php?id=null';
     public $tabla;
+    public $data;
+    public $urlBrian = 'http://192.168.25.59/mvc/controller/libro.controller.php?id=null';
+
+    public function __construct()
+    {
+        $this->tabla = "tbl_libros";
+    }
+
     public function daoSelectLibro($id)
     {
+
         if (is_null($id)) {
             $stmt = Conexion::conectar()->prepare("SELECT * FROM $this->tabla;");
             $stmt->execute();
@@ -20,36 +28,37 @@ class LibroDAO
         }
     }
 
-    public function daoAddLibro($datos)
+    public function daoAddLibro()
     {
+        $datos = $this->data;
         $stmt = Conexion::conectar()->prepare("INSERT INTO $this->tabla (nombre, descripcion, tema) 
             VALUES (:nombre, :descripcion, :tema);");
         $stmt->bindParam(":nombre", $datos['nombre'], PDO::PARAM_STR);
         $stmt->bindParam(":descripcion", $datos['descripcion'], PDO::PARAM_STR);
         $stmt->bindParam(":tema", $datos['tema'], PDO::PARAM_STR);
-        $response = ($stmt->execute()) ? true : false;
-        echo json_encode(["response" =>  $response]);
+        $response = $stmt->execute();
+        return json_encode(["response" =>  $response]);
     }
 
-
-    public static function daoEliminarLibro($id)
+    public function  daoUpdateLibro()
     {
-        $stmt = Conexion::conectar()->prepare("DELETE FROM arquitectura.tbl_libros WHERE  id_libro=:id_libro;");
-        $stmt->bindParam(":id_libro", $id, PDO::PARAM_INT);
-        $results = ($stmt->execute())  ? "ok" : "error";
-        echo json_encode(["success" =>  $results]);
-    }
-
-
-    public static function daoActulizarLibro($datos)
-    {
-        $stmt = Conexion::conectar()->prepare("UPDATE arquitectura.tbl_libros SET nombre=:nombre, descripcion=:descripcion, tema=:tema WHERE  id_libro=:id_libro");
+        $datos = $this->data;
+        var_dump($datos);
+        $stmt = Conexion::conectar()->prepare("UPDATE $this->tabla SET nombre = :nombre, descripcion=:descripcion, tema = :tema WHERE  id_libro=:id_libro;");
         $stmt->bindParam(":id_libro", $datos->edit_id, PDO::PARAM_INT);
         $stmt->bindParam(":nombre", $datos->nombre, PDO::PARAM_STR);
         $stmt->bindParam(":descripcion", $datos->descripcion, PDO::PARAM_STR);
         $stmt->bindParam(":tema", $datos->tema, PDO::PARAM_STR);
-        $response = ($stmt->execute()) ? 'ok' : 'error';
-        echo json_encode(["success" =>  $response]);
+        $response = $stmt->execute();
+        return json_encode(["response" =>  $response]);
+    }
+
+    public static function daoDeleteLibro($id)
+    {
+        $stmt = Conexion::conectar()->prepare("DELETE FROM arquitectura.tbl_libros WHERE  id_libro=:id_libro;");
+        $stmt->bindParam(":id_libro", $id, PDO::PARAM_INT);
+        $results = ($stmt->execute())  ? "ok" : "error";
+        return json_encode(["success" =>  $results]);
     }
 
     public static function getLibroCurl($urlBrian)

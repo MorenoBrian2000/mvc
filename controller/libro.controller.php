@@ -1,7 +1,6 @@
 <?php
 
-require '../model/libro.model.php';
-require '../dao/libro.dao.php';
+require '../appservice/librosappservice.php';
 
 class ControladorLibro
 {
@@ -9,35 +8,31 @@ class ControladorLibro
 
     static public function ctrMostrarLibro()
     {
-        $objModel = new LibroDAO();
-        $objModel->tabla = "tbl_libros";
+        $objAppService = new LibrosAppService();
         $id = ($_GET['id'] == 'null') ? null : $_GET['id'];
-        $respuesta = $objModel->daoSelectLibro($id);
+        $respuesta = $objAppService->getLibros($id);
         echo json_encode($respuesta);
     }
 
     static public function ctrAgregarLibro()
     {
-        $objModel = new LibroDAO();
-        $objModel->tabla = "tbl_libros";
-        $respuesta = $objModel->daoAddLibro($_POST);
-        echo $respuesta;
+        $objAppService = new LibrosAppService();
+        $respuesta = $objAppService->insertLibro($_POST);
+        return $respuesta;
     }
 
-    static public function ctrActulizarLibro($data)
+    static public function ctrActualizarLibro($data)
     {
-        $objModel = new LibroDAO();
-        $objModel->tabla = "tbl_libros";
-        $respuesta = $objModel->daoActulizarLibro($data);
-        echo $respuesta;
-    }
+        $objAppService = new LibrosAppService();
+        $respuesta = $objAppService->updateLibro($data);
+        return $respuesta;
+}
 
     static public function ctrEliminarLibro()
     {
-        $objModel = new LibroDAO();
-        $objModel->tabla = "tbl_libros";
-        $respuesta = $objModel->daoEliminarLibro($_GET["id"]);
-        echo $respuesta;
+        $objAppService = new LibrosAppService();
+        $respuesta = $objAppService->deleteLibro($_GET['id']);
+        return $respuesta;
     }
 
     static public function getLibroCurl()
@@ -56,18 +51,18 @@ class ControladorLibro
 
 switch ($_SERVER["REQUEST_METHOD"]) {
     case 'GET':
-        // ControladorLibro::ctrMostrarLibro();
-        ControladorLibro::getLibroCurl();
+         ControladorLibro::ctrMostrarLibro();
+        /*ControladorLibro::getLibroCurl();*/
         break;
     case 'POST':
-        ControladorLibro::ctrAgregarLibro();
+        echo ControladorLibro::ctrAgregarLibro();
         break;
     case 'PUT':
         $datos = json_decode(file_get_contents('php://input'));
-        ControladorLibro::ctrActulizarLibro($datos);
+        echo ControladorLibro::ctrActualizarLibro($datos);
         break;
     case 'DELETE':
-        ControladorLibro::ctrEliminarLibro();
+        echo ControladorLibro::ctrEliminarLibro();
         break;
     default:
         echo json_encode(["Error" => "Accion no requerida"]);
