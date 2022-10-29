@@ -61,7 +61,7 @@ class LibroDAO
         return json_encode(["success" =>  $results]);
     }
 
-    public static function getLibroCurl($urlBrian)
+    /*public static function getLibroCurl($urlBrian)
     {
         $curl_handle = curl_init();
         curl_setopt($curl_handle, CURLOPT_URL, $urlBrian);
@@ -71,5 +71,5 @@ class LibroDAO
         $response_data = json_decode($curl_data);
         return $response_data;
         // die();
-    }
+    }*/
 }

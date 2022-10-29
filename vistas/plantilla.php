@@ -53,7 +53,8 @@ setlocale(LC_ALL, 'es_MX');
         $_GET["ruta"] == "inicio" ||
         $_GET["ruta"] == "usuarios" ||
         $_GET["ruta"] == "libros" ||
-        $_GET["ruta"] == "salir"
+        $_GET["ruta"] == "salir" ||
+        $_GET["ruta"] == "LibrosApi"
       ) {
 
         include "modulos/" . $_GET["ruta"] . ".php";

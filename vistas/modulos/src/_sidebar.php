@@ -24,6 +24,11 @@
           <i class="fa fa-book  menu-icon"></i>
           <span class="menu-title">Libros</span>
         </a>
+      </li><li class="nav-item">
+        <a class="nav-link" href="LibrosApi">
+          <i class="fa fa-book  menu-icon"></i>
+          <span class="menu-title">Libros Externos</span>
+        </a>
       </li>
 
 
