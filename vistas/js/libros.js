@@ -15,7 +15,7 @@ class Libro {
                 <td>${libro.tema}</td>
                 <td>
                     <button class='badge badge-primary badge-sm'   onclick="Libro.traerLibros(${libro.id_libro})"> <i class="fa fa-pencil"></i> Editar</button>
-                    <button class='badge badge-danger badge-sm' btn-sm'  onclick="Libro.deleteLibro(${libro.id_libro})"> <i class="fa fa-trash"></i> Elimiar</button>
+                    <button class='badge badge-danger badge-sm' onclick="Libro.deleteLibro(${libro.id_libro})"> <i class="fa fa-trash"></i> Elimiar</button>
                 </td>
             </tr>`;
         });
@@ -96,7 +96,7 @@ class Libro {
 
         let data = await response.json();
 
-        if (data.success == "ok") {
+        if (data.success === "ok") {
             Swal.fire('Success!', 'Libro actualizado con exito!', 'success');
             location.reload();
         } else {
