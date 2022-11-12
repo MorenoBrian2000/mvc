@@ -40,12 +40,25 @@ class LibroDAO
         return json_encode(["response" =>  $response]);
     }
 
+    public function daoUpdateLibroApi()
+    {
+        $datos = $this->data;
+        /*var_dump($datos);*/
+        $stmt = Conexion::conectar()->prepare("UPDATE $this->tabla SET nombre = :nombre, descripcion=:descripcion, tema = :tema WHERE  id_libro=:id_libro;");
+        $stmt->bindParam(":id_libro", $datos['edit_id'], PDO::PARAM_STR);
+        $stmt->bindParam(":nombre", $datos['nombre'], PDO::PARAM_STR);
+        $stmt->bindParam(":descripcion", $datos['descripcion'], PDO::PARAM_STR);
+        $stmt->bindParam(":tema", $datos['tema'], PDO::PARAM_STR);
+        $response = $stmt->execute();
+        return json_encode(["response" =>  $response]);
+    }
+
     public function  daoUpdateLibro()
     {
         $datos = $this->data;
-        var_dump($datos);
+        /*var_dump($datos);*/
         $stmt = Conexion::conectar()->prepare("UPDATE $this->tabla SET nombre = :nombre, descripcion=:descripcion, tema = :tema WHERE  id_libro=:id_libro;");
-        $stmt->bindParam(":id_libro", $datos->edit_id, PDO::PARAM_INT);
+        $stmt->bindParam(":id_libro", $datos->edit_id, PDO::PARAM_STR);
         $stmt->bindParam(":nombre", $datos->nombre, PDO::PARAM_STR);
         $stmt->bindParam(":descripcion", $datos->descripcion, PDO::PARAM_STR);
         $stmt->bindParam(":tema", $datos->tema, PDO::PARAM_STR);

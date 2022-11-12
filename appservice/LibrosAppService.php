@@ -24,6 +24,12 @@ class LibrosAppService
         return $objModel->commandUpdateLibro($data);
     }
 
+    public function updateLibroApi($data)
+    {
+        $objModel = new LibrosCommand();
+        return $objModel->commandUpdateLibroApi($data);
+    }
+
     public function deleteLibro($id)
     {
         $objModel = new LibrosCommand();
