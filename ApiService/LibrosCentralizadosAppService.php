@@ -1,8 +1,8 @@
 <?php
 
 class LibrosCentralizadosAppService{
-    public $arrayLibros = [];
-    public $uri = 'http://192.168.149.60/mvc/controller/libro.controller.php?id=null';
+    public $arrayLibros;
+    public $uri = 'http://192.168.119.59/mvc/controller/libro.controller.php?id=null';
 
     public function getLibroCurl()
     {
@@ -19,6 +19,7 @@ class LibrosCentralizadosAppService{
         }
         echo json_encode($this->arrayLibros);
     }
+
 }
 
 $objAppService = new LibrosCentralizadosAppService();

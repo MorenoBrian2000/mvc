@@ -157,25 +157,9 @@
 <!--<script src="vistas/js/libros.js"></script>-->
 <script>
     const getExternalData = async () => {
-        const tbodylibro= document.querySelector('#tbody-libro');
-        let templete = ``;
         const response = await fetch('ApiService/LibrosCentralizadosAppService.php');
-        const data = await response.json();
-
-        data.map(libro => {
-            templete += `<tr>
-                <td>${libro.id_libro}</td>
-                <td>${libro.nombre}</td>
-                <td>${libro.descripcion}</td>
-                <td>${libro.tema}</td>
-                <td>
-                    <button class='badge badge-primary badge-sm'   onclick="Libro.traerLibros(${libro.id_libro})"> <i class="fa fa-pencil"></i> Editar</button>
-                    <button class='badge badge-danger badge-sm' onclick="Libro.deleteLibro(${libro.id_libro})"> <i class="fa fa-trash"></i> Elimiar</button>
-                </td>
-            </tr>`;
-        });
-       tbodylibro.innerHTML = templete;
+        return await response.json();
     }
-    /*getExternalData().then(data => console.log(data));*/
-    getExternalData();
+    getExternalData().then(data => console.log(data));
+
 </script>
