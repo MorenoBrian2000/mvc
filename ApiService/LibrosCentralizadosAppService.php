@@ -25,11 +25,11 @@ class LibrosCentralizadosAppService
             'nombre' => $_POST['nombre'],
             'descripcion' => $_POST['descripcion'],
             'tema' => $_POST['tema'],
-            'action' => $_POST['action']
+            'action' => $_POST['addLibro']
         );
         $fields_string = http_build_query($fields);
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->uri);
+        curl_setopt($ch, CURLOPT_URL, 'http://192.168.64.7/mvc/controller/libro.controller.php?id=null');
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
         $data = curl_exec($ch);
@@ -38,19 +38,20 @@ class LibrosCentralizadosAppService
 
     public static function updateLibroCurl($data)
     {
-        var_dump($data);
-        $dataSet = array(
+        $fields = array(
+            'action' => 'updateLibro',
             'edit_id' => $data->edit_id,
             'descripcion' => $data->descripcion,
             'nombre' => $data->nombre,
             'tema' => $data->tema
         );
-        $ch = curl_init('http://192.168.64.7/mvc/controller/libro.controller.php');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataSet));
-        $response = curl_exec($ch);
-        return $response;
+        $fields_string = http_build_query($fields);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://192.168.64.7/mvc/controller/libro.controller.php?id=null');
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        $data = curl_exec($ch);
+        curl_close($ch);
     }
 }
 
