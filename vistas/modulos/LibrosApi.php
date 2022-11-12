@@ -14,13 +14,13 @@
 <div class="col-lg-12 p-0 mb-3 ">
     <table id="example" class="table dt-responsive nowrap" width="100%">
         <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">NOMBRE</th>
-            <th scope="col">DESCRIPCION</th>
-            <th scope="col">TEMA</th>
-            <th scope="col">ACCIONES</th>
-        </tr>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">NOMBRE</th>
+                <th scope="col">DESCRIPCION</th>
+                <th scope="col">TEMA</th>
+                <th scope="col">ACCIONES</th>
+            </tr>
         </thead>
         <tbody id="tbody-libro">
         </tbody>
@@ -84,7 +84,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-success" id="crear-libro">Guardar Cambios</button>
+                <button type="button" class="btn btn-success" onclick="addLibro();">Guardar Cambios</button>
             </div>
         </div>
     </div>
@@ -145,21 +145,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-success" id="edit-libro">Guardar Cambios</button>
+                <button type="button" class="btn btn-success" onclick="actulizarLibro();">Guardar Cambios</button>
             </div>
         </div>
     </div>
 </div>
 
-
-
-
-<!--<script src="vistas/js/libros.js"></script>-->
-<script>
-    const getExternalData = async () => {
-        const response = await fetch('ApiService/LibrosCentralizadosAppService.php');
-        return await response.json();
-    }
-    getExternalData().then(data => console.log(data));
-
-</script>
+<script src="vistas/js/libros-ext.js"></script>
