@@ -68,13 +68,7 @@ const actulizarLibro = async () => {
     });
 
     let data = await response.json();
-
-    if (data.success == "ok") {
-        Swal.fire('Success!', 'Libro actualizado con exito!', 'success');
-        location.reload();
-    } else {
-        Swal.fire('Error!', 'Ocurrio un error, verifica los datos!', 'error');
-    }
+    location.reload();
 
 }
 
