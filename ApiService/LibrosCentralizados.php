@@ -2,7 +2,6 @@
 
 class LibrosCentralizados
 {
-
     public function getToken()
     {
         $data = json_encode(array('usuario' => '19002561', 'contrasena' => '19002561'));
