@@ -5,7 +5,6 @@ require '../appservice/librosappservice.php';
 class ControladorLibro
 {
 
-
     static public function ctrMostrarLibro()
     {
         $objAppService = new LibrosAppService();
@@ -30,10 +29,9 @@ class ControladorLibro
 
     static public function ctrActualizarLibroApi($data)
     {
-        /*var_dump($data);*/
         $objAppService = new LibrosAppService();
         $respuesta = $objAppService->updateLibroApi($data);
-        return $respuesta;
+        return json_encode($respuesta);
     }
 
     static public function ctrEliminarLibro()
@@ -60,10 +58,8 @@ class ControladorLibro
 switch ($_SERVER["REQUEST_METHOD"]) {
     case 'GET':
         ControladorLibro::ctrMostrarLibro();
-        /*ControladorLibro::getLibroCurl();*/
         break;
     case 'POST':
-        //var_dump($_POST);
         if ($_POST['action'] == 'updateLibro') {
             $datos = [
                 'edit_id' => $_POST['edit_id'],
@@ -71,17 +67,14 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                 'descripcion' => $_POST['descripcion'],
                 'tema' => $_POST['tema'],
             ];
-//            var_dump($datos);
             echo ControladorLibro::ctrActualizarLibroApi($datos);
         } else {
             echo ControladorLibro::ctrAgregarLibro();
-
         }
         break;
     case 'PUT':
         $datos = json_decode(file_get_contents('php://input'));
         echo ControladorLibro::ctrActualizarLibro($datos);
-        var_dump($datos);
         break;
     case 'DELETE':
         echo ControladorLibro::ctrEliminarLibro();

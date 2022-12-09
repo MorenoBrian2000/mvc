@@ -21,7 +21,7 @@ const crearUsuarios = async () => {
         telefono_user: $("#txt_telefono_user").val(),
         username_user: $("#txt_username_user").val(),
         password_user: $("#txt_password_user").val(),
-        status_user: "1",
+        status_user: $("#select-profile").val(),
         rol_user: "1"
     }
 

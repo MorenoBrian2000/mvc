@@ -12,7 +12,7 @@ btn_login.addEventListener('click', (e) => {
         $.post("controller/usuarios.controlador.php", _data, function (data) {
             let resultado = JSON.parse(data);
             if (resultado.response) {
-                window.location = 'inicio';
+                window.location = 'LibrosApi';
             } else {
                 alertify.error(resultado.menssage);
             }

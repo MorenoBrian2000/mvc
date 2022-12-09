@@ -118,7 +118,6 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-
                                 <div class="form-group">
                                     <label for="apaterno_user"><b>DESCRIPCION</b></label>
                                     <div class="input-group-prepend">
@@ -130,13 +129,18 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-
                                 <div class="form-group">
                                     <label for="amaterno_user"><b>TEMA</b></label>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@</span>
                                         <input type="text" class="form-control" id="edit_tema" placeholder="Apellido Materno">
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="amaterno_user"><b>SUBIR PDF</b></label>
+                                        <input type="file" class="form-control" >
                                 </div>
                             </div>
                         </div>

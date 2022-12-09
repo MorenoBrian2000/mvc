@@ -6,7 +6,7 @@ require '../model/conexion.php';
 class UserController
 {
 
-    public static function  ctrMostrarUsers()
+    public static function ctrMostrarUsers()
     {
 
         if (isset($_GET["id_user"])) {
@@ -31,7 +31,7 @@ class UserController
         $password = md5($datos->password_user);
 
         $stmt = Conexion::conectar()->prepare("INSERT INTO tbl_users (nombre_user, apaterno_user, amaterno_user, correo_user, domicilio_user, telefono_user, username_user , password_user, status_user, rol_user) 
-            VALUES (:nombre_user, :apaterno_user, :amaterno_user, :correo_user, :domicilio_user, :telefono_user, :username_user, :password_user, :status_user, :rol_user)");
+            VALUES (:nombre_user, :apaterno_user, :amaterno_user, :correo_user, :domicilio_user, :telefono_user, :username_user, :password_user, :rol_user ,:status_user )");
 
         $stmt->bindParam(":nombre_user", $datos->nombre_user, PDO::PARAM_STR);
         $stmt->bindParam(":apaterno_user", $datos->apaterno_user, PDO::PARAM_STR);
@@ -45,7 +45,7 @@ class UserController
         $stmt->bindParam(":rol_user", $datos->rol_user, PDO::PARAM_INT);
 
         $response = ($stmt->execute()) ? true : false;
-        echo json_encode(["response" =>  $response]);
+        echo json_encode(["response" => $response]);
     }
 
     public static function ctrActulizarUsers($datos)
@@ -64,15 +64,15 @@ class UserController
         $stmt->bindParam(":rol_user", $datos->rol_user, PDO::PARAM_INT);
 
         $response = ($stmt->execute()) ? true : false;
-        echo json_encode(["response" =>  $response]);
+        echo json_encode(["response" => $response]);
     }
 
     public static function ctrEliminarUser()
     {
         $stmt = Conexion::conectar()->prepare("DELETE FROM tbl_users WHERE id_user = :id_user");
         $stmt->bindParam(":id_user", $_GET["id_user"], PDO::PARAM_INT);
-        $results = ($stmt->execute())  ? "ok" : "error";
-        echo json_encode(["response" =>  $results]);
+        $results = ($stmt->execute()) ? "ok" : "error";
+        echo json_encode(["response" => $results]);
     }
 }
 

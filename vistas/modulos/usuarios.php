@@ -107,7 +107,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -116,6 +115,18 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@</span>
                                         <input type="text" class="form-control" id="txt_domicilio_user" placeholder="Domicilio">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="domicilio_user"><b>Profile</b></label>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@</span>
+                                        <select class="form-control" id="select-profile">
+                                            <option value="1">Administrador</option>
+                                            <option value="2">Usuario</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

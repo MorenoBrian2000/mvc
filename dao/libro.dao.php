@@ -43,7 +43,6 @@ class LibroDAO
     public function daoUpdateLibroApi()
     {
         $datos = $this->data;
-        /*var_dump($datos);*/
         $stmt = Conexion::conectar()->prepare("UPDATE $this->tabla SET nombre = :nombre, descripcion=:descripcion, tema = :tema WHERE  id_libro=:id_libro;");
         $stmt->bindParam(":id_libro", $datos['edit_id'], PDO::PARAM_STR);
         $stmt->bindParam(":nombre", $datos['nombre'], PDO::PARAM_STR);

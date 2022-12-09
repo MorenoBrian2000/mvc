@@ -95,8 +95,7 @@ class Libro {
         });
 
         let data = await response.json();
-
-        if (data.success == "ok") {
+        if (data.response) {
             Swal.fire('Success!', 'Libro actualizado con exito!', 'success');
             location.reload();
         } else {
